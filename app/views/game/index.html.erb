@@ -1,9 +1,11 @@
-<h1 class="language-ruby"><%= CodeRay.scan("game.start! # => true", :ruby).div.html_safe %></h1>
+<h1 id="status"><%= CodeRay.scan("game.start! # => true", :ruby).div.html_safe %></h1>
 <% @challenge.each_with_index do |(challenge, result),i|  %>
   <div class="challenge" sequence="<%= i %>" result='<%= result %>' <%= "style=display:none" if i > 0 %>>
     <pre class="language-ruby"><%= CodeRay.scan(challenge, :ruby).div.html_safe %></pre>
-    <button id='btn-true' value='true'>True</button>
-    <button id='btn-false' value='false'>False</button>
+    <div class="buttons">
+      <button id='btn-true' value='true'>True</button>
+      <button id='btn-false' value='false'>False</button>
+    </div>
   </div>
 <% end %>
 <div class="answers"></div>

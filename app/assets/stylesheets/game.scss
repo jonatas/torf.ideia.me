@@ -16,3 +16,32 @@
 .challenge pre {
   font-size: 200%;
 }
+
+.buttons {
+  width: 100%;
+  position: fixed;
+  bottom: 20vh;
+}
+
+button {
+  width: 40vw;
+  height: 20vh;
+  margin: 0px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+#btn-true {
+  background: green;
+  color: white;
+}
+
+#btn-false{
+  background: red;
+  color: white;
+}
+#status {
+  width: 100%;
+}
+
+
