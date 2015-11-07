@@ -6,6 +6,7 @@ gem 'sprockets', github: "rails/sprockets"
 gem 'sass-rails', github: "rails/sass-rails"
 gem 'arel', github: "rails/arel"
 gem 'rack', github: "rack/rack"
+gem 'coderay'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'

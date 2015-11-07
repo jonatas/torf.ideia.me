@@ -1,2 +1,12 @@
 <h1>True or False Game! <small>ready to start?</small></h1>
-
+<%= link_to "Start", "#", id: 'start-game' %>
+<pre class="language-ruby">
+<%= 
+  CodeRay.scan(%|
+puts "Hello"
+class A  < A::B
+  def b
+    @c = 123
+  end
+end |, :ruby).div.html_safe
+ %>
