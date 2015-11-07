@@ -8,7 +8,8 @@ class @Game
     @success = 0
     @fails = 0
     @answerTime = 0
-  answer: (rightOrWrong) ->
+  answer: (value) ->
+    rightOrWrong = value == currentChallenge.attr('result')
     @answers.push rightOrWrong
     @answerTime +=  (new Date()).getTime() - @lastAnswer.getTime() if @lastAnswer?
     @lastAnswer = new Date()
@@ -17,23 +18,27 @@ class @Game
     else
       @fails += 1
 
+    [_class,label] = if rightOrWrong then ['right',"√"] else ['wrong',"†"]
+
+    $(".answers").append($("<span class='#{_class}'>#{label}</span>"))
+    @nextChallenge()
+    $("#status").html(@status())
+  nextChallenge: ->
+    currentChallenge.hide()
+    nextChallenge = currentChallenge.next('.challenge')
+    nextChallenge.show()
+    window.currentChallenge = nextChallenge
+  status: ->
+    """
+      #{currentChallenge.attr('sequence')}: 
+      <span class='right'>#{@success}√</span> 
+      <span class='wrong'>#{@fails}†</span>
+      in #{@answerTime / 1000} seconds
+    """
 
 $ ->
   window.game = new Game()
   $('#btn-true,#btn-false').on 'click', ->
-    currentChallenge = $(@).parents('.challenge')
-    rightAnswer = @value == currentChallenge.attr('result')
-    [_class,label] = if rightAnswer then ['right',"√"] else ['wrong',"†"]
-    game.answer rightAnswer
-    $(".answers").append($("<span class='#{_class}'>#{label}</span>"))
-    currentChallenge.hide()
-    nextChallenge = currentChallenge.next('.challenge')
-    nextChallenge.show()
-    status = """
-      #{nextChallenge.attr('sequence')}: 
-      <span class='right'>#{game.success}√</span> 
-      <span class='wrong'>#{game.fails}†</span>
-      in #{game.answerTime / 1000} seconds
-    """
-    $("#status").html(status)
+    window.currentChallenge = $(@).parents('.challenge')
+    game.answer @value, currentChallenge
 
