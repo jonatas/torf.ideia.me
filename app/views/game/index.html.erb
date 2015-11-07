@@ -1,12 +1,10 @@
 <h1>True or False Game! <small>ready to start?</small></h1>
 <%= link_to "Start", "#", id: 'start-game' %>
-<pre class="language-ruby">
-<%= 
-  CodeRay.scan(%|
-puts "Hello"
-class A  < A::B
-  def b
-    @c = 123
-  end
-end |, :ruby).div.html_safe
- %>
+<% @challenge.each_with_index do |(challenge, result),i|  %>
+  <div class="challenge" sequence="<%= i %>" result='<%= result %>' <%= "style=display:none" if i > 0 %>>
+    <pre class="language-ruby"><%= CodeRay.scan(challenge, :ruby).div.html_safe %></pre>
+    <button id='btn-true' value='true'>True</button>
+    <button id='btn-false' value='false'>False</button>
+  </div>
+<% end %>
+<div class="answers"></div>
