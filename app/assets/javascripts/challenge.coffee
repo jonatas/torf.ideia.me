@@ -24,28 +24,18 @@ class @Game
 
   updateStatus: -> $("#status").html(@status())
   nextChallenge: (rightOrWrong)->
-    if rightOrWrong is null
-      @timeouted += 1
-    else if rightOrWrong is true
-      @success += 1
-    else
-      @fails += 1
-    [_class,label] =
-      if rightOrWrong isnt null
-        if rightOrWrong is true
-          ['right',"√"]
-        else
-          ['wrong',"†"] 
-      else
-        ['timeouted',"ø"]
-    $(".answers").append($("<span class='#{_class}'>#{label}</span>"))
+    @classifyAnswer(rightOrWrong)
     @currentChallenge.hide()
     nextChallenge = @currentChallenge.next('.challenge')
-    nextChallenge.show()
-    @timeout.cancel()
-    @timeout = new AnswerTimeout(5 + @timeout.time)
-    @currentChallenge = nextChallenge
-    @timeout.start()
+    console.log nextChallenge
+    if nextChallenge?
+      nextChallenge.show()
+      @timeout.cancel()
+      @timeout = new AnswerTimeout(5 + @timeout.time)
+      @currentChallenge = nextChallenge
+      @timeout.start()
+    else
+      @finishGame()
   status: ->
     """
       #{@currentChallenge.attr('sequence')}: 
@@ -58,6 +48,32 @@ class @Game
     @updateStatus()
   timeFromStart: -> ((new Date()).getTime() - @startAt.getTime()) / 1000
   onAnswerTimeout: -> @nextChallenge(null)
+  finishGame: ->
+    @timeout.cancel()
+    $(".challenge").hide()
+    $(".buttons").hide()
+    failChallenges = $(".challenge[answer=wrong]")
+    if failChallenges.length > 0
+      $("#status").text("Review your #{failChallenges.length} fails")
+      failChallenges.show()
+      for challenge in failChallenges
+        challenge = $(challenge)
+        challenge.find('.code pre').append("<span class='timeouted'> # => #{challenge.attr('result')}</span>")
+    else
+      $("#status").text("You are a true compiler! Congratulations!")
+  classifyAnswer: (rightOrWrong) ->
+    if rightOrWrong is null
+      @timeouted += 1
+      [_class, label] = ['timeouted',"ø"]
+    else if rightOrWrong is true
+      @success += 1
+      [_class,label] = ['right',"√"]
+    else
+      @fails += 1
+      [_class, label] = ['wrong',"†"] 
+
+    @currentChallenge.attr('answer', _class)
+    $(".answers").append($("<span class='#{_class}'>#{label}</span>"))
 
 class AnswerTimeout
   constructor: (@time=10) ->

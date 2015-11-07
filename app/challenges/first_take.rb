@@ -46,7 +46,7 @@ nil.nil?
 
 "@jonatasdp"[/@(.*)/,1] == 'jonatasdp'
 
-"jonatas@ideia.me"[/(.*)@(.*)/,2]  == 'ideia.me'
+"x@y.z"[/(.*)@(.*)/,2] == 'y.z'
 
 (2..3).to_a - (2..3).to_a == [3]
 

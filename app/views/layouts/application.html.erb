@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <title>True Or False Game - by ideia.me</title>
     <%= stylesheet_link_tag 'application', media: 'all'%>
     <%= javascript_include_tag 'application' %>
@@ -15,6 +14,8 @@
       ga('create', 'UA-12893758-3', 'auto');
       ga('send', 'pageview');
     </script>
+    <meta content="True" name="HandheldFriendly">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
   </head>
   <body>
     <%= yield %>
