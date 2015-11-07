@@ -1,5 +1,4 @@
-<h1>True or False Game! <small>ready to start?</small></h1>
-<%= link_to "Start", "#", id: 'start-game' %>
+<h1 class="language-ruby"><%= CodeRay.scan("game.start! # => true", :ruby).div.html_safe %></h1>
 <% @challenge.each_with_index do |(challenge, result),i|  %>
   <div class="challenge" sequence="<%= i %>" result='<%= result %>' <%= "style=display:none" if i > 0 %>>
     <pre class="language-ruby"><%= CodeRay.scan(challenge, :ruby).div.html_safe %></pre>
