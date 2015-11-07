@@ -1,5 +1,12 @@
 ## README
 
+It's a simple true or false game.
+
+The basic thing on these game is that your mind is the compiler.
+
+You need to compile and answer true or false for each expression/code you
+challenge!
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
