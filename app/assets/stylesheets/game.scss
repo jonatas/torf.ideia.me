@@ -24,11 +24,16 @@
 }
 
 button {
-  width: 40vw;
+  width: 20vh;
   height: 20vh;
   margin: 0px;
   margin-right: 20px;
   margin-left: 20px;
+  border-radius: 50%;
+}
+
+button:hover {
+  cursor: hand;
 }
 
 #btn-true {
@@ -40,8 +45,17 @@ button {
   background: red;
   color: white;
 }
+#btn-false:hover{
+  background: white;
+  color: red;
+}
+#btn-true:hover{
+  background: white;
+  color: green;
+}
+
+
 #status {
   width: 100%;
 }
-
 
