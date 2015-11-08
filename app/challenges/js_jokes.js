@@ -1,3 +1,14 @@
+
+true + true > true
+
+true + true > true
+
+true - true == true
+
+!!("0") == true
+
+!!("-") == true
+
 new Array(3) == ",,"
 
 x=[0]
@@ -45,3 +56,5 @@ true == false + 1
 undefined == false
 
 true == undefined == false
+
+Number(true - false) == +false
