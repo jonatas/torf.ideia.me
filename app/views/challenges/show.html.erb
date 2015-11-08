@@ -1,3 +1,5 @@
+<input id="challengeId" type="text" hidden="hidden" value="<%= @challenge.id%>">
+
 <% @challenge.items.each_with_index do |(challenge, result),i|  %>
   <div class="challenge" sequence="<%= i %>" result='<%= result %>' <%= "style=display:none" if i > 0 %>>
     <pre class="language-<%= @challenge.language %>" <%= 'style="text-align: center"'.html_safe if challenge.lines.size == 1 %><%= CodeRay.scan(challenge, @challenge.language).div.html_safe %></pre>

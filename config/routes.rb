@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :scores
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   match "/users/auth/:action/callback" => "users/omniauth_callbacks#:action",
     :as => "user_omniauth_callback",

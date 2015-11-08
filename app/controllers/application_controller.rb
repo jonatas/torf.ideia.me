@@ -7,4 +7,13 @@ class ApplicationController < ActionController::Base
     session[:user_data] = nil
     redirect_to root_url
   end
+
+  def current_user
+    return nil if session[:user_data].blank?
+
+    @current_user ||= User.from_omniauth({
+      :provider => "github",
+      :uid => session[:user_data]["login"]
+    })
+  end
 end

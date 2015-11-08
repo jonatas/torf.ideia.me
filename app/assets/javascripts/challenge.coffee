@@ -62,6 +62,17 @@ class @Game
     else
       msg = "You are a true compiler! Congratulations!"
     $(".challenge:first").before($(msg))
+    @sendScore()
+  sendScore: ->
+    $.ajax(
+      url: "/scores.json",
+      type: "POST",
+      data: score:
+        challenge_id: $("#challengeId").val()
+        right: @success
+        wrong: @fails
+        timed_out: @timeouted
+    )
   classifyAnswer: (rightOrWrong) ->
     if rightOrWrong is null
       @timeouted += 1

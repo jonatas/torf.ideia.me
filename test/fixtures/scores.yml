@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: 
+  right: 1
+  wrong: 1
+  timed_out: 1
+
+two:
+  user: 
+  right: 1
+  wrong: 1
+  timed_out: 1

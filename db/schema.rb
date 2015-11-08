@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108035246) do
+ActiveRecord::Schema.define(version: 20151108174531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(version: 20151108035246) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "language"
+  end
+
+  create_table "scores", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "challenge_id"
+    t.integer  "right"
+    t.integer  "wrong"
+    t.integer  "timed_out"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["challenge_id"], name: "index_scores_on_challenge_id", using: :btree
+    t.index ["user_id"], name: "index_scores_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,4 +51,6 @@ ActiveRecord::Schema.define(version: 20151108035246) do
     t.index ["uid"], name: "index_users_on_uid", using: :btree
   end
 
+  add_foreign_key "scores", "challenges"
+  add_foreign_key "scores", "users"
 end

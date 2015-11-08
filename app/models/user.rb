@@ -1,6 +1,11 @@
 class User < ActiveRecord::Base
+  has_many :scores
+
   validates :provider, :uid, :presence => true, :allow_blank => false
 
+  #
+  # from_omniauth
+  #
   def self.from_omniauth(auth_hash)
     user = where(:provider => auth_hash[:provider])
       .where(:uid => auth_hash[:uid])

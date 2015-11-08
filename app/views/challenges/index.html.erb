@@ -1,13 +1,24 @@
 <div class="container">
-  <h1>Official Challenges</h1>
-  <ul>
-    <% @challenges.group_by(&:language).each do |language, challenges| %>
-      <%= content_tag :h1, language %>
-      <ul>
-        <% challenges.each do |challenge|  %>
-          <%= render challenge %>
-        <% end %>
-      </ul>
+  <div class="col-md-6">
+    <h1>Official Challenges</h1>
+    <ul>
+      <% @challenges.group_by(&:language).each do |language, challenges| %>
+        <%= content_tag :h1, language %>
+        <ul>
+          <% challenges.each do |challenge|  %>
+            <%= render challenge %>
+          <% end %>
+        </ul>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-md-6">
+    <h1>Score</h1>
+    <% if user_signed_in? %>
+      <%= render "scores/score_table" if user_signed_in? %>
+    <% else %>
+      Please <%= link_to "sign in with Github", github_sign_in_path %> to record your score!
     <% end %>
-  </ul>
+  </div>
 </div>

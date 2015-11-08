@@ -6,7 +6,7 @@ module AuthenticationHelper
    AUTHORIZE_URL = "https://github.com/login/oauth/authorize?"
 
   def callback_url
-    host = 
+    host =
       if Rails.env.production?
         "torf.r15.railsrumble.com"
       else
@@ -23,5 +23,12 @@ module AuthenticationHelper
     }
 
     AUTHORIZE_URL + _params.map { |i| i * "="  } * "&"
+  end
+
+  def current_user
+    @current_user ||= User.from_omniauth({
+      :provider => "github",
+      :uid => session[:user_data]["login"]
+    })
   end
 end
