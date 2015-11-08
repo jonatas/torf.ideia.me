@@ -93,6 +93,8 @@ class AnswerTimeout
 $ ->
   window.game = new Game()
   game.start()
-  $('#btn-true,#btn-false').on 'click', ->
+  $('#btn-true,#btn-false').on 'touchend click', (event) ->
+    event.stopPropagation()
+    event.preventDefault()
     game.answer @value
 
