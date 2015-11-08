@@ -1,33 +1,35 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">T or F</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <span id="answer-number"></span>
-        <div class="answers"></div>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <a class="navbar-brand" href="/">
         <% if user_signed_in? %>
-          <p class="navbar-text">
+          <p>
             <%= image_tag session[:user_data]["avatar_url"], width: "32", height: "32", class: 'img-circle',title: session[:user_data]["name"] %>
             @<%= session[:user_data]["login"] %>
             <span id="status"></span>
           </p>
-          <li><%= link_to "Sign out", sign_out_path %></li>
         <% else %>
-          <span id="#status_game"></span>
-          <li><%= link_to "Sign in with Github", github_sign_in_path %></li>
+          <span id="#status"></span>
+        <% end %>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right ">
+        <% if user_signed_in? %>
+          <%= link_to content_tag(:i, " Sign out", class: "glyphicon glyphicon-log-out"), sign_out_path, class: "btn btn-default" %>
+        <% else %>
+          <%= link_to content_tag(:i, " Sign in with Github", class: "glyphicon glyphicon-log-in"), github_sign_in_path, class: "btn btn-default" %>
         <% end %>
       </ul>
     </div>
   </div>
 </nav>
+<div class="answers"></div>
+<div id="timeout"></div>

@@ -12,7 +12,8 @@ task 'load_game' => :environment  do
   end
 
   {
-    "Javascript jokes" => "js_jokes"
+    "Javascript jokes" => "js_jokes",
+    "Hacking basics" => "js_hacks"
   }.each do |title,file|
     game = Challenge.find_or_initialize_by title: title
     game.items = JSParser.load Rails.root.join("app/challenges/#{file}.js")
