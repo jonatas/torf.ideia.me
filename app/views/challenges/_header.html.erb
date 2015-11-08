@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <%= image_tag session[:user_data]["avatar_url"], size: "50", class: 'rounded-avatar' %>
+  <%= image_tag session[:user_data]["avatar_url"], width: "50", height: "50", class: 'rounded-avatar' %>
   <%= session[:user_data]["name"] %>
   <%= link_to "Sign out", sign_out_path %>
 <% else %>
