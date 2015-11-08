@@ -1,7 +1,7 @@
-<h1 id="status"><%= CodeRay.scan("game.start! # => true", :ruby).div.html_safe %></h1>
+<h1 id="status"><%= CodeRay.scan("game.ready # => true", :ruby).div.html_safe %></h1>
 <% @challenge.items.each_with_index do |(challenge, result),i|  %>
   <div class="challenge" sequence="<%= i %>" result='<%= result %>' <%= "style=display:none" if i > 0 %>>
-    <pre class="language-ruby" <%= 'style="text-align: center"'.html_safe if challenge.lines.size == 1 %><%= CodeRay.scan(challenge, :ruby).div.html_safe %></pre>
+    <pre class="language-<%= @challenge.language %>" <%= 'style="text-align: center"'.html_safe if challenge.lines.size == 1 %><%= CodeRay.scan(challenge, @challenge.language).div.html_safe %></pre>
   </div>
 <% end %>
 <div class="buttons">
