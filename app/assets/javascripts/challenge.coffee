@@ -28,7 +28,7 @@ class @Game
     @currentChallenge.hide()
     nextChallenge = @currentChallenge.next('.challenge')
     console.log nextChallenge
-    if nextChallenge?
+    if nextChallenge? && nextChallenge.length > 0
       nextChallenge.show()
       @timeout.cancel()
       @timeout = new AnswerTimeout(5 + @timeout.time)
@@ -54,13 +54,14 @@ class @Game
     $(".buttons").hide()
     failChallenges = $(".challenge[answer=wrong]")
     if failChallenges.length > 0
-      $("#status").text("Review your #{failChallenges.length} fails")
+      msg = "<h1>Review your #{failChallenges.length} fails</h1>"
       failChallenges.show()
       for challenge in failChallenges
         challenge = $(challenge)
         challenge.find('.code pre').append("<span class='timeouted'> # => #{challenge.attr('result')}</span>")
     else
-      $("#status").text("You are a true compiler! Congratulations!")
+      msg = "You are a true compiler! Congratulations!"
+    $(".challenge:first").before($(msg))
   classifyAnswer: (rightOrWrong) ->
     if rightOrWrong is null
       @timeouted += 1
@@ -93,6 +94,8 @@ class AnswerTimeout
 $ ->
   window.game = new Game()
   game.start()
-  $('#btn-true,#btn-false').on 'click', ->
+  $('#btn-true,#btn-false').on 'touchend click', (event) ->
+    event.stopPropagation()
+    event.preventDefault()
     game.answer @value
 

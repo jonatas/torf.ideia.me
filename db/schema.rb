@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20151108010009) do
     t.json     "items"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "language"
   end
 
   create_table "users", force: :cascade do |t|

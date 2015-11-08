@@ -4,7 +4,7 @@ true == true
 
 true == false
 
-( true != false ) == true
+true != false
 
 true and false == false
 
@@ -63,28 +63,6 @@ nil.nil?
 "abc".tr('abc','x') == 'xxx'
 
 ## Xunda stuff
-
-3 - 2 > 1
-1 + 3 == 5 - 1
--1 - 1 - -1 == -3
-
-## Math eggs
-
-2 + 3 == 5
-
-3 / 2 == 1
-
-3 % 2 == 1
-
-9 % 5 % 3 == 1
-
-### Bad at math? good at programming?
-
-0.1 - -0.2 == -0.1
-
--0.1 - 0.2 == -0.3
-
-(-0.1 - 0.2).round(2) == -0.3
 
 # Regex
 
@@ -180,11 +158,13 @@ Array.new(4).compact.length == 4
 
 # Functional stuff
 
-(1..5).to_a.select{|e|e % 2 == 0} == [2,4]
+(1..5).to_a
+  .select {|e| e % 2 == 0}
+  .send :==, [2, 4]
 
 (1..5).to_a
-  .select{|e|e % 2 == 0}
-  .map{|e| e * e / 4}
+  .select {|e| e % 2 == 0}
+  .map {|e| e * e / 4}
   .reverse
   .send :==, [1, 4]
 

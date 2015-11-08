@@ -1,7 +1,23 @@
-
 task 'load_game' => :environment  do
-  easy = Challenge.find_or_initialize_by title: "Ruby easy"
-  easy.items = Parser.load Rails.root.join('app/challenges/first_take.rb')
-  easy.save
-  puts "#{easy.items.size} loaded!"
+  {
+    "Ruby easy" => "first_take",
+    "Ruby medium" => "second_take",
+    "Math basic" => "math_basic"
+  }.each do |title,file|
+    game= Challenge.find_or_initialize_by title: title
+    game.items = Parser.load Rails.root.join("app/challenges/#{file}.rb")
+    game.language = "ruby"
+    game.save
+    puts "#{title} - #{game.items.size} loaded!"
+  end
+
+  {
+    "Javascript jokes" => "js_jokes"
+  }.each do |title,file|
+    game = Challenge.find_or_initialize_by title: title
+    game.items = JSParser.load Rails.root.join("app/challenges/#{file}.js")
+    game.language = "javascript"
+    game.save
+    puts "#{title} - #{game.items.size} loaded!"
+  end
 end
