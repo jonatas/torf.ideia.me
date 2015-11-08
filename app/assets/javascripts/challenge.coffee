@@ -21,8 +21,10 @@ class @Game
 
     @nextChallenge(rightOrWrong)
     @updateStatus()
-
-  updateStatus: -> $("#status").html(@status())
+  updateStatus: ->
+    $("#answer-number").text(@currentChallenge.attr('sequence'))
+    $("#timeout").text( @timeout.time )
+    $("#status").html(@status())
   nextChallenge: (rightOrWrong)->
     @classifyAnswer(rightOrWrong)
     @currentChallenge.hide()
@@ -38,11 +40,9 @@ class @Game
       @finishGame()
   status: ->
     """
-      #{@currentChallenge.attr('sequence')}: 
       <span class='right'>#{@success}√</span> 
       <span class='wrong'>#{@fails}†</span>
       <span class='timeouted'>#{@timeouted}ø</span>
-      ( #{@timeout.time} )
     """
   eachTimeoutSecond: ->
     @updateStatus()
