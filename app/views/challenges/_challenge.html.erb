@@ -1,1 +1,4 @@
-<%= link_to challenge.title, challenge %>
+<li>
+  <%= challenge.language %> - <%= link_to challenge.title, challenge, title: "#{challenge.items.size} questions to answer!" %>
+  <small><%= challenge.items.size %> questions to solve in <%= distance_of_time_in_words challenge.estimated_time %>!</small>
+</li>
