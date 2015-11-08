@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <%= image_tag session[:user_data]["avatar_url"], :size => "50" %>
+  <%= session[:user_data]["name"] %>
+  <%= link_to "Sign out", sign_out_path %>
+<% else %>
+  <%= link_to "Sign in with Github",
+    "https://github.com/login/oauth/authorize" +
+    "?client_id=#{ENV["GITHUB_APP_ID"]}" +
+    "&redirect_url=http://localhost:3000/users/auth/github/callback" +
+    "&scope=user" +
+    "&state=#{SecureRandom.urlsafe_base64}"
+  %>
+<% end %>
