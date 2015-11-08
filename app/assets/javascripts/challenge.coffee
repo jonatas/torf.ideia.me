@@ -40,7 +40,7 @@ class @Game
       @finishGame()
   status: ->
     """
-      <span class='right'>#{@success}√</span> 
+      <span class='right'>#{@success}√</span>
       <span class='wrong'>#{@fails}†</span>
       <span class='timeouted'>#{@timeouted}ø</span>
     """
