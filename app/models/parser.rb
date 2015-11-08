@@ -12,13 +12,14 @@ class Parser
         next
       else
         code = lines.join "\n"
-        result = eval(code).inspect rescue $!
+        result = eval(code).inspect rescue puts("#{$!}\n -- #{code}") and $!
         challenge[code] = result
         lines = []
         results[result] ||= 0
         results[result] += 1
       end
     end
+    p results
     challenge
   end
 end

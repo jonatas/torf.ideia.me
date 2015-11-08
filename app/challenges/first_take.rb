@@ -159,7 +159,8 @@ Array.new(4).compact.length == 4
 # Functional stuff
 
 (1..5).to_a
-  .select {|e| e % 2 == 0} == [2,4]
+  .select {|e| e % 2 == 0}
+  .send :==, [2, 4]
 
 (1..5).to_a
   .select {|e| e % 2 == 0}
