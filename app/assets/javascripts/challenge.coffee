@@ -38,8 +38,8 @@ class @Game
       @finishGame()
   status: ->
     """
-      #{@currentChallenge.attr('sequence')}: 
-      <span class='right'>#{@success}√</span> 
+      #{@currentChallenge.attr('sequence')}:
+      <span class='right'>#{@success}√</span>
       <span class='wrong'>#{@fails}†</span>
       <span class='timeouted'>#{@timeouted}ø</span>
       ( #{@timeout.time} )
@@ -71,7 +71,7 @@ class @Game
       [_class,label] = ['right',"√"]
     else
       @fails += 1
-      [_class, label] = ['wrong',"†"] 
+      [_class, label] = ['wrong',"†"]
 
     @currentChallenge.attr('answer', _class)
     $(".answers").append($("<span class='#{_class}'>#{label}</span>"))

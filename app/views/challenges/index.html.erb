@@ -1,5 +1,3 @@
-<%= render "header" %>
-
 <h1>Official Challenges</h1>
 <ul>
   <% @challenges.group_by(&:language).each do |language,challenges| %>

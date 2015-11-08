@@ -1,0 +1,29 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        TorF
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <p class="navbar-text">
+            <%= image_tag session[:user_data]["avatar_url"], class: 'rounded-avatar' %>
+            <%= session[:user_data]["name"] %>
+          </p>
+          <li><%= link_to "Sign out", sign_out_path %></li>
+        <% else %>
+          <li><%= link_to "Sign in with Github", github_sign_in_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
