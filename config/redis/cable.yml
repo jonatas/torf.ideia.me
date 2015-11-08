@@ -11,4 +11,7 @@ local: &local
   :timeout: 1
   :inline: true
 development: *local
+production: &production
+  :url: <%= ENV["REDIS_URL"] %>
+  :timeout: 1
 test: *local
