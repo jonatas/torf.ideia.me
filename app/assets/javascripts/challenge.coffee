@@ -92,10 +92,11 @@ class AnswerTimeout
       game.eachTimeoutSecond(i)
     game.timeout.timeoutId =  countdown.bind(@)(@time)
 $ ->
-  window.game = new Game()
-  game.start()
-  $('#btn-true,#btn-false').on 'touchend click', (event) ->
-    event.stopPropagation()
-    event.preventDefault()
-    game.answer @value
+  if $(".challenge").length > 0
+    window.game = new Game()
+    game.start()
+    $('#btn-true,#btn-false').on 'touchend click', (event) ->
+      event.stopPropagation()
+      event.preventDefault()
+      game.answer @value
 
