@@ -91,7 +91,17 @@ class AnswerTimeout
         game.timeout.timeoutId = setTimeout(countdown.bind(@), 1000, i - 1) if !@canceled?
       game.eachTimeoutSecond(i)
     game.timeout.timeoutId =  countdown.bind(@)(@time)
+
 $ ->
+  window.cable = Cable.createConsumer 'ws://localhost:28080'
+  window.channel = cable.subscriptions.create "default",
+    connected: ->
+      console.log "connected! ", @
+      @publish 'connected'
+
+    received: (data) -> console.log @, "received:", data
+    publish: (event) -> @perform('event',event)
+     
   if $(".challenge").length > 0
     window.game = new Game()
     game.start()
