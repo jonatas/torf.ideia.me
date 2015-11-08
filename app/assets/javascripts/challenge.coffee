@@ -40,9 +40,9 @@ class @Game
       @finishGame()
   status: ->
     """
-      <span class='right'>#{@success}√</span> 
-      <span class='wrong'>#{@fails}†</span>
-      <span class='timeouted'>#{@timeouted}ø</span>
+      <span class='badge glyphicon glyphicon-ok'> #{@success}</span> 
+      <span class='badge glyphicon glyphicon-remove'> #{@fails}</span>
+      <span class='badge glyphicon glyphicon-time'> #{@timeouted}</span>
     """
   eachTimeoutSecond: ->
     @updateStatus()
@@ -65,16 +65,16 @@ class @Game
   classifyAnswer: (rightOrWrong) ->
     if rightOrWrong is null
       @timeouted += 1
-      [_class, label] = ['timeouted',"ø"]
+      _class= 'timeouted glyphicon glyphicon-time'
     else if rightOrWrong is true
       @success += 1
-      [_class,label] = ['right',"√"]
+      _class= 'right glyphicon glyphicon-ok'
     else
       @fails += 1
-      [_class, label] = ['wrong',"†"]
+      _class= 'wrong glyphicon glyphicon-remove'
 
-    @currentChallenge.attr('answer', _class)
-    $(".answers").append($("<span class='#{_class}'>#{label}</span>"))
+    @currentChallenge.attr('answer', _class.split(' ')[0])
+    $(".answers").append($("<span class='#{_class}'></span>"))
 
 class AnswerTimeout
   constructor: (@time=10) ->

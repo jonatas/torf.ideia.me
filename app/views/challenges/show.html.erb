@@ -1,9 +1,9 @@
 <% @challenge.items.each_with_index do |(challenge, result),i|  %>
-  <div class="challenge" sequence="<%= i %>" result='<%= result %>' <%= "style=display:none" if i > 0 %>>
+  <div class="row challenge" sequence="<%= i %>" result='<%= result %>' <%= "style=display:none" if i > 0 %>>
     <pre class="language-<%= @challenge.language %>" <%= 'style="text-align: center"'.html_safe if challenge.lines.size == 1 %><%= CodeRay.scan(challenge, @challenge.language).div.html_safe %></pre>
   </div>
 <% end %>
-<div class="buttons">
-  <button id='btn-true' value='true'>True</button>
-  <button id='btn-false' value='false'>False</button>
+<div class="row buttons">
+  <button class="colspan-6" id='btn-true' value='true'>True</button>
+  <button class="colspan-6" id='btn-false' value='false'>False</button>
 </div>
