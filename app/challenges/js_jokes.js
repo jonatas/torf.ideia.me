@@ -1,3 +1,6 @@
+"Milk Powder " + 
+    + " for kids" ==
+        "Milk Powder NaN"
 
 true + true > true
 
@@ -58,3 +61,8 @@ undefined == false
 true == undefined == false
 
 Number(true - false) == +false
+
+"a" == String('a')
+
+
+"a" == new String('a')
