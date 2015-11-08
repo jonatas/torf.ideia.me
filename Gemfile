@@ -9,10 +9,7 @@ gem 'arel', github: "rails/arel"
 gem 'rack', github: "rack/rack"
 gem 'coderay'
 gem 'rack-commonlogger'
-gem 'redis'
 gem 'puma'
-gem 'turbolinks'
-gem 'actioncable', github: "rails/actioncable"
 
 
 # Use postgresql as the database for Active Record
