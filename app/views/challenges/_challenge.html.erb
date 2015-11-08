@@ -1,4 +1,5 @@
-<li>
+<div class="row">
+  <%= link_to "",challenge, type: "button", class:"glyphicon glyphicon-play-circle btn btn-large" %>
   <%= link_to challenge.title, challenge, title: "#{challenge.items.size} questions to answer!" %>
-  <small><%= challenge.items.size %> questions to solve in <%= distance_of_time_in_words challenge.estimated_time %>!</small>
-</li>
+  <%= challenge.items.size %> questions <span class="badge glyphicon glyphicon-time"> <%= distance_of_time_in_words challenge.estimated_time %></span>
+</div>

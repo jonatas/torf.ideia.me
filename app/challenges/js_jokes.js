@@ -3,16 +3,14 @@
         "Milk Powder NaN"
 
 true + true > true
-
-true + true > true
-
+true + true <= true
 true - true == true
 
 !!("0") == true
 
 !!("-") == true
 
-new Array(3) == ",,"
+new Array(2) == ","
 
 x=[0]
 x==x
@@ -64,5 +62,10 @@ Number(true - false) == +false
 
 "a" == String('a')
 
-
 "a" == new String('a')
+
+0.1 === 0.1
+
+0.1 + 0.2 === 0.3
+
+3 > 2 > 1
