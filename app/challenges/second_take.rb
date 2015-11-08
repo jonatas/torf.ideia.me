@@ -41,6 +41,9 @@ even.last + odd.reverse.first == 19
 sequence = (10..20).to_a
 sequence.select {|e| e % 2 == 0} == [12,14]
 
+
 def a ; end == :a
 
 a.nil? == true
+
+{a:1,b:3}.map {|e|e * '='}*'&' == "a=1&b=3"
