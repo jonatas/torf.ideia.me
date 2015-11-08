@@ -18,8 +18,8 @@ nil.nil?.nil?
 5 / 2 == 2.5
 
 a ||= true
+
 a ||= false
-a == true
 
 "rumble".split("r")[0].empty?
 
@@ -40,7 +40,6 @@ even.last + odd.reverse.first == 19
 
 sequence = (10..20).to_a
 sequence.select {|e| e % 2 == 0} == [12,14]
-
 
 def a ; end == :a
 

@@ -1,11 +1,13 @@
-<h1>Official Challenges</h1>
-<ul>
-  <% @challenges.group_by(&:language).each do |language,challenges| %>
-    <%= content_tag :h1, language %>
-    <ul>
-      <% challenges.each do |challenge|  %>
-        <%= render challenge %>
-      <% end %>
-    </ul>
-  <% end %>
-</ul>
+<div class="container">
+  <h1>Official Challenges</h1>
+  <ul>
+    <% @challenges.group_by(&:language).each do |language, challenges| %>
+      <%= content_tag :h1, language %>
+      <ul>
+        <% challenges.each do |challenge|  %>
+          <%= render challenge %>
+        <% end %>
+      </ul>
+    <% end %>
+  </ul>
+</div>
