@@ -18,19 +18,20 @@ a == true
 
 "rumble".split("")[1,2].reverse * 2 == "mumu"
 
-proc { begin true ensure false end }.call
+-> { begin true ensure false end }.() == false
 
 sequence = (1..10).to_a
-even, odd = sequence
-  .inject([[],[]]) {|a,e| a[(e % 2)].push(e); a}
+even, odd = sequence.inject([[],[]]) do |array,e|
+  array[(e % 2)].push(e)
+  array
+end
 even[-1] == 10
 
 odd.first == 1
 
 even.last + odd.reverse.first == 19
 
-sequence
-  .select {|e| e % 2 == 0} == [2,4]
+sequence.select {|e| e % 2 == 0} == [2,4]
 
 (even + odd).sort != sequence
 
