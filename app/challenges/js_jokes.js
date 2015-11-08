@@ -35,3 +35,13 @@ Math.max() < Math.min()
 isNaN({}+{})
 
 isNaN([]+[])
+
+2 / (false + 3) > 0.666
+
+2 / false + 3 == Infinity
+
+true == false + 1
+
+undefined == false
+
+true == undefined == false
