@@ -10,10 +10,9 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return nil if session[:user_data].blank?
-
     @current_user ||= User.from_omniauth({
       :provider => "github",
-      :uid => session[:user_data]["login"]
+      :uid => session[:user_data]["nickname"]
     })
   end
 end

@@ -1,4 +1,4 @@
-class JSParser
+class JsParser
   def self.load file
     results = {}
     challenge = {}

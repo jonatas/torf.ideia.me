@@ -1,13 +1,20 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Challenge</th>
-      <th>Right</th>
-      <th>Wrong</th>
-      <th>Timed out</th>
+      <th><%= current_user.scores.count %> challenges</th>
+      <th>✅</th>
+      <th>❌</th>
+      <th>⌛️</th>
     </tr>
   </thead>
   <tbody>
-    <%= render current_user.scores %>
+    <% current_user.scores.each do |score| %>
+      <tr>
+        <td><%= score.challenge.try(:title) %></td>
+        <td><%= score.right %></td>
+        <td><%= score.wrong %></td>
+        <td><%= score.timed_out %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
