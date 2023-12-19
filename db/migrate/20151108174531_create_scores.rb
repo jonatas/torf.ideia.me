@@ -1,4 +1,4 @@
-class CreateScores < ActiveRecord::Migration
+class CreateScores < ActiveRecord::Migration[7.2]
   def change
     create_table :scores do |t|
       t.references :user, index: true, foreign_key: true
