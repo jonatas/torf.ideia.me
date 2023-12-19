@@ -16,11 +16,11 @@ gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', github: "rails/coffee-rails"
 
-gem 'therubyracer', '= 0.12.3', platforms: :ruby
+gem 'therubyracer',  platforms: :ruby
 
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
