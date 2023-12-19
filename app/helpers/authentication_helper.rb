@@ -8,7 +8,7 @@ module AuthenticationHelper
   def callback_url
     host =
       if Rails.env.production?
-        "torf.r15.railsrumble.com"
+        "torf.ideia.me"
       else
         "localhost:3000"
       end
@@ -28,7 +28,7 @@ module AuthenticationHelper
   def current_user
     @current_user ||= User.from_omniauth({
       :provider => "github",
-      :uid => session[:user_data]["login"]
+      :uid => session[:user_data]["nickname"]
     })
   end
 end

@@ -18,7 +18,7 @@
     <% if user_signed_in? %>
       <%= render "scores/score_table" if user_signed_in? %>
     <% else %>
-      Please <%= link_to "sign in with Github", github_sign_in_path %> to record your score!
+      Please <%= link_to "sign in with Github", github_sign_in_path %> to record and see other folks scores!
     <% end %>
   </div>
 </div>
