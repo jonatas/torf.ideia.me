@@ -1,8 +1,17 @@
-<input id="challengeId" type="text" hidden="hidden" value="<%= @challenge.id%>">
+<input id="challenge" type="text" hidden="hidden"
+  language=<%= @challenge.language %>
+  value=<%= @challenge.id %>>
 
-<% @challenge.items.each_with_index do |(challenge, result),i|  %>
-  <div class="row challenge" sequence="<%= i %>" result='<%= result %>' <%= "style=display:none" if i > 0 %>>
-    <pre class="language-<%= @challenge.language %>" <%= 'style="text-align: center"'.html_safe if challenge.lines.size == 1 %><%= CodeRay.scan(challenge, @challenge.language).div.html_safe %></pre>
+<% @challenge.items.each_with_index do |item,i|  %>
+  <div class="row challenge"
+       sequence="<%= i %>"
+       answer="<%= item['answer'] %>"
+       <%= "style=display:none" if i > 0 %>>
+    <h3 class="hint" style='display:none'><%= item['hint'] %></h3>
+    <pre class="language-<%= @challenge.language %>"
+      <%= 'style="text-align: center"'.html_safe if item['code'].lines.size == 1 %>>
+      <%= CodeRay.scan(item['code'], @challenge.language).div.html_safe %>
+    </pre>
   </div>
 <% end %>
 <div class="row buttons">

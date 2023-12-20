@@ -1,7 +1,6 @@
-class Parser
+class RubyParser
   def self.load file
-    results = {}
-    challenge = {}
+    items = []
     lines = []
     File.readlines(file).each_with_index do |line, i|
       next if line =~ /^\s*#/
@@ -13,13 +12,11 @@ class Parser
       else
         code = lines.join "\n"
         result = eval(code).inspect rescue puts("#{$!}\n -- #{code}") and $!
-        challenge[code] = result
+        # TODO: capture hints from comments
+        items << {code: code, answer: result }
         lines = []
-        results[result] ||= 0
-        results[result] += 1
       end
     end
-    p results
-    challenge
+    items
   end
 end

@@ -19,3 +19,7 @@
   height: 25px;
   border-radius: .5em;
 }
+.hint {
+  color: #999;
+  padding-left: 30px;
+}

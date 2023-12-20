@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '3.2.2'
 
 gem 'rails', github: "rails/rails"
+gem 'pg_query'
 gem 'sprockets-rails', github: "rails/sprockets-rails"
 gem 'sprockets', github: "rails/sprockets"
 gem 'sass-rails', github: "rails/sass-rails"

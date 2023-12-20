@@ -1,7 +1,7 @@
 class JsParser
   def self.load file
     results = {}
-    challenge = {}
+    items = []
     lines = []
     File.readlines(file).each_with_index do |line, i|
       next if line =~ %r{^\s*//}
@@ -15,12 +15,13 @@ class JsParser
         ctx = V8::Context.new
         code = lines.join("\n")
         result = ctx.eval code
-        challenge[code] = result
+        # TODO: capture hints from comments
+        items << {code: code, answer: result}
         lines = []
         results[result] ||= 0
         results[result] += 1
       end
     end
-    challenge
+    items
   end
 end

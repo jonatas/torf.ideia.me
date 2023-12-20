@@ -14,7 +14,7 @@ class @Game
     @currentChallenge = $(".challenge:first")
     @timeout.start()
   answer: (value) ->
-    rightOrWrong = value == @currentChallenge.attr('result')
+    rightOrWrong = value == @currentChallenge.attr('answer')
     @answers.push rightOrWrong
     @answerTime +=  (new Date()).getTime() - @lastAnswer.getTime() if @lastAnswer?
     @lastAnswer = new Date()
@@ -40,9 +40,9 @@ class @Game
       @finishGame()
   status: ->
     """
-      <span class='badge glyphicon glyphicon-ok'> #{@success}</span> 
-      <span class='badge glyphicon glyphicon-remove'> #{@fails}</span>
-      <span class='badge glyphicon glyphicon-time'> #{@timeouted}</span>
+      <span class='badge'> ✅ #{@success}</span> 
+      <span class='badge'> ❌ #{@fails}</span>
+      <span class='badge'> ⌛️ #{@timeouted}</span>
     """
   eachTimeoutSecond: ->
     @updateStatus()
@@ -52,15 +52,17 @@ class @Game
     @timeout.cancel()
     $(".challenge").hide()
     $(".buttons").hide()
-    failChallenges = $(".challenge[answer=wrong]")
+    failChallenges = $(".challenge[user_answer=wrong]")
     if failChallenges.length > 0
       msg = "<h1>Review your #{failChallenges.length} fails</h1>"
       failChallenges.show()
       for challenge in failChallenges
         challenge = $(challenge)
-        challenge.find('.code pre').append("<span class='timeouted'> # => #{challenge.attr('result')}</span>")
+        challenge.find('.code pre').append("<span class='timeouted'> # => #{challenge.attr('answer')}</span>")
+        challenge.find('.hint').show()
     else
-      msg = "You are a true compiler! Congratulations!"
+      language = $("#challenge").attr('language')
+      msg = "You are a true #{language} compiler! Congratulations!"
     $(".challenge:first").before($(msg))
     @sendScore()
   sendScore: ->
@@ -68,7 +70,7 @@ class @Game
       url: "/scores.json",
       type: "POST",
       data: score:
-        challenge_id: $("#challengeId").val()
+        challenge_id: $("#challenge").val()
         right: @success
         wrong: @fails
         timed_out: @timeouted
@@ -84,7 +86,7 @@ class @Game
       @fails += 1
       _class= 'wrong glyphicon glyphicon-remove'
 
-    @currentChallenge.attr('answer', _class.split(' ')[0])
+    @currentChallenge.attr('user_answer', _class.split(' ')[0])
     $(".answers").append($("<span class='#{_class}'></span>"))
 
 class AnswerTimeout
@@ -96,10 +98,12 @@ class AnswerTimeout
     @time -= 1
     countdown = (i) ->
       game.timeout.time = i
+      game.currentChallenge.find('.hint').show() if game.timeout.time < 3
       if i < 0
         game.onAnswerTimeout()
       else
         game.timeout.timeoutId = setTimeout(countdown.bind(@), 1000, i - 1) if !@canceled?
+
       game.eachTimeoutSecond(i)
     game.timeout.timeoutId =  countdown.bind(@)(@time)
 

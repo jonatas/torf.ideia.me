@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
 
   validates :provider, :uid, :presence => true, :allow_blank => false
 
+  def last_scores
+    scores.select('distinct on (challenge_id) *').order('challenge_id, created_at desc')
+  end
   #
   # from_omniauth
   #
