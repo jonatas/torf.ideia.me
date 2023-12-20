@@ -23,3 +23,7 @@
   color: #999;
   padding-left: 30px;
 }
+.challenge {
+  padding: 10px;
+  display: none;
+}

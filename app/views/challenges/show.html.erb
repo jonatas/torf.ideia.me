@@ -1,12 +1,24 @@
 <input id="challenge" type="text" hidden="hidden"
   language=<%= @challenge.language %>
-  value=<%= @challenge.id %>>
+  value=<%= @challenge.id %> />
 
-<% @challenge.items.each_with_index do |item,i|  %>
+<% setup, challenges = @challenge.items.partition{_1.key?('setup')} %>
+<% setup.flat_map(&:values).each do |code| %>
+  <div class="setup">
+    <pre class="language-<%= @challenge.language %>"
+      <%= CodeRay.scan(code, @challenge.language).div.html_safe %>
+    </pre>
+  </div>
+<% end %>
+<% if setup.any? %>
+  <div class="row buttons">
+    <button class="colspan-6" id='btn-ok' value='ok'>OK</button>
+  </div>
+<% end %>
+<% challenges.each_with_index do |item,i|  %>
   <div class="row challenge"
        sequence="<%= i %>"
-       answer="<%= item['answer'] %>"
-       <%= "style=display:none" if i > 0 %>>
+       answer="<%= item['answer'] %>">
     <h3 class="hint" style='display:none'><%= item['hint'] %></h3>
     <pre class="language-<%= @challenge.language %>"
       <%= 'style="text-align: center"'.html_safe if item['code'].lines.size == 1 %>>
@@ -14,7 +26,7 @@
     </pre>
   </div>
 <% end %>
-<div class="row buttons">
+<div id="torf_buttons" class="row buttons">
   <button class="colspan-6" id='btn-true' value='true'>True</button>
   <button class="colspan-6" id='btn-false' value='false'>False</button>
 </div>

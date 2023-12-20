@@ -8,32 +8,50 @@ class @Game
     @success = 0
     @fails = 0
     @answerTime = 0
-    @timeout = new AnswerTimeout(10)
     @timeouted = 0
+  setup: ->
+    $(".setup").show()
+    $("#torf_buttons").hide()
+    $("#btn-ok").show()
+
+  ack: ->
+    # minimize the setup code examples reduzing font size of the entire pre
+    # and removing the line numbers. Also reduce the padding between lines and
+    # code elements.
+    $(".setup pre").css('line-height', '1.0')
+    $(".setup pre").css('display', 'contents')
+    $(".setup pre").css('padding', '0px')
+    $(".setup pre").css('margin-left', '20px')
+    $(".setup pre").css('font-size', '10px')
+    $(".setup pre").css('margin-top', '0px')
+    $(".setup pre").css('margin-bottom', '0px')
+    $("#btn-ok").hide()
+    game.start()
   start: ->
+    @timeout = new AnswerTimeout(1000)
     @currentChallenge = $(".challenge:first")
+    @currentChallenge.show()
+    $("#torf_buttons").show()
     @timeout.start()
-  answer: (value) ->
-    rightOrWrong = value == @currentChallenge.attr('answer')
+  answer: (user_input) ->
+    rightOrWrong = user_input == @currentChallenge.attr('answer')
     @answers.push rightOrWrong
     @answerTime +=  (new Date()).getTime() - @lastAnswer.getTime() if @lastAnswer?
     @lastAnswer = new Date()
-
     @nextChallenge(rightOrWrong)
     @updateStatus()
   updateStatus: ->
     $("#answer-number").text(@currentChallenge.attr('sequence'))
     $("#timeout").text( @timeout.time )
     $("#status").html(@status())
-  nextChallenge: (rightOrWrong)->
+  nextChallenge: (rightOrWrong ) ->
     @classifyAnswer(rightOrWrong)
     @currentChallenge.hide()
     nextChallenge = @currentChallenge.next('.challenge')
-    console.log nextChallenge
     if nextChallenge? && nextChallenge.length > 0
       nextChallenge.show()
       @timeout.cancel()
-      @timeout = new AnswerTimeout(5 + @timeout.time)
+      @timeout = new AnswerTimeout(100 + @timeout.time)
       @currentChallenge = nextChallenge
       @timeout.start()
     else
@@ -110,7 +128,12 @@ class AnswerTimeout
 $ ->
   if $(".challenge").length > 0
     window.game = new Game()
-    game.start()
+    game.setup()
+
+    $('#btn-ok').on 'touchend click', (event) ->
+      event.stopPropagation()
+      event.preventDefault()
+      game.ack()
     $('#btn-true,#btn-false').on 'touchend click', (event) ->
       event.stopPropagation()
       event.preventDefault()

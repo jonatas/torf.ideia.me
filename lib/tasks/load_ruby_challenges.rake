@@ -27,7 +27,8 @@ task 'load_game' => :environment  do
     "Date and Time" => "datetime",
     "Logical Operators" => "basic",
     "Arithmetics" => "arithmetics",
-    "Date & Time" => "time"
+    "Date & Time" => "time",
+    "Window Function " => "window",
   }.each do |title,file|
     game = Challenge.find_or_initialize_by title: title, language: "sql"
     items = SqlParser.parse Rails.root.join("app/challenges/#{file}.sql")
